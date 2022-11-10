@@ -1,20 +1,23 @@
 package com.example.loginsignup;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button signupbt;
-    private EditText email,password,confirmpassword;
+    private Button loginbt;
+    private TextView dele;
+
 
 
     @Override
@@ -25,53 +28,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void connectComponents() {
-        signupbt = findViewById(R.id.btSignUpMain);
-        email = findViewById(R.id.etEmailMain);
-        password = findViewById(R.id.etPasswordMain);
-        confirmpassword = findViewById(R.id.etPassword2Main);
+        signupbt = findViewById(R.id.bSignUpf);
+        loginbt = findViewById(R.id.loginbt);
+        dele = findViewById(R.id.textView);
     }
 
-    public void signup(View view) {
-        String emailstr, passwordstr, confirmpasswordstr;
-        emailstr = email.getText().toString();
-        passwordstr = password.getText().toString();
-        confirmpasswordstr = confirmpassword.getText().toString();
-
-        if (emailstr.trim().isEmpty() || passwordstr.trim().isEmpty() || confirmpasswordstr.trim().isEmpty()) {
-            Toast.makeText(this, "you didnt entered all fields", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if (!isEmailValid(emailstr)) {
-            Toast.makeText(this, "Email is incorrect", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (!isPasswordValid(passwordstr)) {
-            Toast.makeText(this, "password should be written in another way", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if (!passwordstr.equals(confirmpasswordstr)){
-            Toast.makeText(this, "passwords are not identical", Toast.LENGTH_SHORT).show();
-        }
-        // TODO: sign up to system
-
+    public void signupFragment(View view) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayout, new SignUPFragment());
+        ft.commit();
+        dele.setText(" ");
     }
 
-    private boolean isPasswordValid(String passwordstr) {
-        Pattern pattern;
-        Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(passwordstr);
-
-        return matcher.matches();
-    }
-
-    public boolean isEmailValid(String st)
-    {
-        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(st);
-        return matcher.matches();
+    public void LoginFragment(View view) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayout, new LoginFragment());
+        ft.commit();
+        dele.setText(" ");
     }
 }

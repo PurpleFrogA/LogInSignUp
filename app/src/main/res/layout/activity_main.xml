@@ -6,59 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/etPassword2Main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:ems="10"
-        android:hint="Confirm password"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/etPasswordMain"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswordMain" />
-
-    <EditText
-        android:id="@+id/etEmailMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="58dp"
-        android:ems="10"
-        android:hint="E-mail"
-        android:inputType="textEmailAddress"
+    <Button
+        android:id="@+id/bSignUpf"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="19dp"
+        android:onClick="signupFragment"
+        android:text="New to app? creat an account"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <EditText
-        android:id="@+id/etPasswordMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/etEmailMain"
-        app:layout_constraintTop_toBottomOf="@+id/etEmailMain" />
+        app:layout_constraintTop_toBottomOf="@+id/loginbt" />
 
     <Button
-        android:id="@+id/btSignUpMain"
-        android:onClick="signup"
+        android:id="@+id/loginbt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="82dp"
-        android:text="sign up"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="598dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="LoginFragment"
+        android:text="YOu have an account? Log in "
+        app:layout_constraintBottom_toTopOf="@+id/bSignUpf"
+        app:layout_constraintStart_toStartOf="@+id/bSignUpf"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword2Main" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="38dp"
-        app:layout_constraintEnd_toEndOf="@+id/etEmailMain"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="728dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="163dp"
+                android:layout_height="62dp"
+                android:layout_marginTop="256dp"
+                android:text="welcome to our app"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
