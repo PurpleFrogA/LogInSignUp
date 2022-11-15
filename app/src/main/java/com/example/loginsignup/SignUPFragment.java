@@ -2,6 +2,7 @@ package com.example.loginsignup;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -10,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,6 +27,7 @@ import java.util.regex.Pattern;
 public class SignUPFragment extends Fragment {
     private Button btsignup;
     private EditText email, password, confirmpassword;
+    private FirebaseServices fbs;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -88,9 +94,10 @@ public class SignUPFragment extends Fragment {
                 emailstr = email.getText().toString();
                 passwordstr = password.getText().toString();
                 confirmpasswordstr = confirmpassword.getText().toString();
+                fbs = FirebaseServices.getInstance();
 
                 if (emailstr.trim().isEmpty() || passwordstr.trim().isEmpty() || confirmpasswordstr.trim().isEmpty()) {
-                    Toast.makeText(getActivity(), "you didnt entered all fields", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "you didn't entered all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -105,18 +112,36 @@ public class SignUPFragment extends Fragment {
                 if (!passwordstr.equals(confirmpasswordstr)){
                     Toast.makeText(getActivity(), "passwords are not identical", Toast.LENGTH_SHORT).show();
                 }
+                fbs.getAuth().createUserWithEmailAndPassword(emailstr,passwordstr)
+                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful()){
+
+                                }
+                                else {
+
+                                }
+
+                            }
+                        });
+
                 // TODO: sign up to system
 
             }
 
             private boolean isPasswordValid(String password) {
+                /*
                 Pattern pattern;
                 Matcher matcher;
-                final String PASSWORD_PATTERN = "^(?=.[0-9])(?=.[A-Z])(?=.*[@#$%^&+=!*])(?=\\S+$).{4,}$";
+                final String PASSWORD_PATTERN = "^(?=.*[A-Za-z])(?=.*\\\\d)(?=.*[$@$!%*#?&])[A-Za-z\\\\d$@$!%*#?&]{8,}$";
                 pattern = Pattern.compile(PASSWORD_PATTERN);
                 matcher = pattern.matcher(password);
 
                 return matcher.matches();
+                */
+
+                return true;
             }
 
             public boolean isEmailValid(String st)
