@@ -14,9 +14,7 @@ public class FirebaseServices {
         return auth;
     }
 
-    public FirebaseFirestore getFire() {
-        return fire;
-    }
+    public FirebaseFirestore getFire() {return fire;}
 
     public FirebaseStorage getStorage() {
         return storage;

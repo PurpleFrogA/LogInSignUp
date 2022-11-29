@@ -4,7 +4,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,9 +102,12 @@ public class LoginFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // PUT YOUR CODE HERE
+                                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                                    ft.replace(R.id.frameLayout, new BookFragment());
+                                    ft.commit();
                                 } else {
-                                    // PUT YOUR CODE HERE
+                                    Log.e("TAG", task.getException().getMessage());
+                                    Toast.makeText(getActivity(), "Username or Password incorrect", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

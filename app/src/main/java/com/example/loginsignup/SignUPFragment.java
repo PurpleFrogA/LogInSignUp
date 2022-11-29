@@ -4,7 +4,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,6 +89,7 @@ public class SignUPFragment extends Fragment {
         email = getView().findViewById(R.id.etEmailMain);
         password = getView().findViewById(R.id.etPasswordMain);
         confirmpassword = getView().findViewById(R.id.etPassword2Main);
+        fbs = FirebaseServices.getInstance();
         btsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,7 +97,6 @@ public class SignUPFragment extends Fragment {
                 emailstr = email.getText().toString();
                 passwordstr = password.getText().toString();
                 confirmpasswordstr = confirmpassword.getText().toString();
-                fbs = FirebaseServices.getInstance();
 
                 if (emailstr.trim().isEmpty() || passwordstr.trim().isEmpty() || confirmpasswordstr.trim().isEmpty()) {
                     Toast.makeText(getActivity(), "you didn't entered all fields", Toast.LENGTH_SHORT).show();
@@ -117,10 +119,13 @@ public class SignUPFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-
+                                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                                    ft.replace(R.id.frameLayout, new BookFragment());
+                                    ft.commit();
                                 }
                                 else {
-
+                                    Log.e("TAG", task.getException().getMessage());
+                                    Toast.makeText(getActivity(), "Username or Password incorrect", Toast.LENGTH_SHORT).show();
                                 }
 
                             }
